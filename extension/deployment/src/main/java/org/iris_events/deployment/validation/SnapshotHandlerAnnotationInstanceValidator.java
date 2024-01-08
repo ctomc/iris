@@ -2,14 +2,11 @@ package org.iris_events.deployment.validation;
 
 import java.util.List;
 
-import org.iris_events.common.message.SnapshotRequested;
+import org.iris_events.deployment.IrisDotNames;
 import org.jboss.jandex.AnnotationInstance;
-import org.jboss.jandex.DotName;
 import org.jboss.jandex.IndexView;
 
 public class SnapshotHandlerAnnotationInstanceValidator implements AnnotationInstanceValidator {
-
-    private static final DotName SNAPSHOT_REQUESTED_DOT_NAME = DotName.createSimple(SnapshotRequested.class.getCanonicalName());
 
     private final List<AnnotationInstanceValidator> validators;
 
@@ -18,7 +15,7 @@ public class SnapshotHandlerAnnotationInstanceValidator implements AnnotationIns
         final var methodReturnTypeAnnotationValidator = new MethodReturnTypeAnnotationValidator(indexView,
                 messageAnnotationValidator);
 
-        final var requiredMessageValidator = new AllowedMessageValidator(List.of(SNAPSHOT_REQUESTED_DOT_NAME));
+        final var requiredMessageValidator = new AllowedMessageValidator(List.of(IrisDotNames.SNAPSHOT_REQUESTED_DOT_NAME));
         final var snapshotMethodParameterTypeAnnotationValidator = new MethodParameterTypeAnnotationValidator(indexView,
                 List.of(requiredMessageValidator, messageAnnotationValidator));
         final var resourceTypeParamAnnotationValidator = new ResourceTypeParamAnnotationValidator();

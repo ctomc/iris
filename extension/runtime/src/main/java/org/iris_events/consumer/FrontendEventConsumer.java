@@ -87,7 +87,7 @@ public class FrontendEventConsumer implements RecoveryListener {
         deliverCallbackProviderMap.forEach((routingKey, callbackProvider) -> {
             try {
                 channel.queueBind(queueName, Exchanges.FRONTEND.getValue(), routingKey);
-                deliverCallbackMap.put(routingKey, callbackProvider.createDeliverCallback(channel));
+                deliverCallbackMap.put(routingKey, callbackProvider.createDeliverCallback(channel, queueName));
             } catch (IOException e) {
                 String msg = String.format("Could not setup deliver callback for routing key = %s", routingKey);
                 log.error(msg);

@@ -1,15 +1,13 @@
 package org.iris_events.deployment.validation;
 
-import org.iris_events.annotations.Message;
+import static org.iris_events.deployment.IrisDotNames.DOT_NAME_PRODUCED_EVENT;
+
 import org.iris_events.deployment.MessageHandlerValidationException;
 import org.jboss.jandex.AnnotationInstance;
-import org.jboss.jandex.DotName;
 import org.jboss.jandex.IndexView;
 import org.jboss.jandex.Type;
 
 public class MethodReturnTypeAnnotationValidator implements AnnotationInstanceValidator {
-
-    private final DotName DOT_NAME_PRODUCED_EVENT = DotName.createSimple(Message.class.getCanonicalName());
 
     private final IndexView index;
     private final MessageAnnotationValidator messageAnnotationValidator;

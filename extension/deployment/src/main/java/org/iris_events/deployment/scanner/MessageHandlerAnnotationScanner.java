@@ -3,7 +3,6 @@ package org.iris_events.deployment.scanner;
 import static org.iris_events.annotations.ExchangeType.FANOUT;
 
 import org.iris_events.annotations.ExchangeType;
-import org.iris_events.annotations.MessageHandler;
 import org.iris_events.asyncapi.parsers.BindingKeysParser;
 import org.iris_events.asyncapi.parsers.ConsumerPerInstanceParser;
 import org.iris_events.asyncapi.parsers.ConsumerPrefetchCountParser;
@@ -14,6 +13,7 @@ import org.iris_events.asyncapi.parsers.MessageScopeParser;
 import org.iris_events.asyncapi.parsers.QueueAutoDeleteParser;
 import org.iris_events.asyncapi.parsers.QueueDurableParser;
 import org.iris_events.asyncapi.parsers.RolesAllowedParser;
+import org.iris_events.deployment.IrisDotNames;
 import org.iris_events.deployment.builditem.MessageHandlerInfoBuildItem;
 import org.iris_events.deployment.constants.AnnotationInstanceParams;
 import org.iris_events.deployment.validation.AnnotationInstanceValidator;
@@ -23,8 +23,6 @@ import org.jboss.jandex.IndexView;
 
 public class MessageHandlerAnnotationScanner extends HandlerAnnotationScanner {
 
-    private static final DotName DOT_NAME_MESSAGE_HANDLER = DotName.createSimple(MessageHandler.class.getCanonicalName());
-
     private final AnnotationInstanceValidator annotationValidator;
 
     public MessageHandlerAnnotationScanner(AnnotationInstanceValidator annotationValidator) {
@@ -33,7 +31,7 @@ public class MessageHandlerAnnotationScanner extends HandlerAnnotationScanner {
 
     @Override
     protected DotName getAnnotationName() {
-        return DOT_NAME_MESSAGE_HANDLER;
+        return IrisDotNames.MESSAGE_HANDLER;
     }
 
     @Override

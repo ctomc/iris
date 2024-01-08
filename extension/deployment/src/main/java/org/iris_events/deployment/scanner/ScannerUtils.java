@@ -4,21 +4,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.iris_events.annotations.CachedMessage;
-import org.iris_events.annotations.Message;
+import org.iris_events.deployment.IrisDotNames;
 import org.jboss.jandex.*;
 
 public class ScannerUtils {
 
-    private static final DotName DOT_NAME_MESSAGE = DotName.createSimple(Message.class.getCanonicalName());
-    private static final DotName DOT_NAME_CACHED_MESSAGE = DotName.createSimple(CachedMessage.class.getCanonicalName());
-
     public static AnnotationInstance getMessageAnnotation(final MethodInfo methodInfo, final IndexView index) {
         final var consumedClassInfo = getConsumedEventClassInfo(methodInfo, index);
-        final var annotationInstance = consumedClassInfo.declaredAnnotation(DOT_NAME_MESSAGE);
+        final var annotationInstance = consumedClassInfo.declaredAnnotation(IrisDotNames.MESSAGE);
 
         if (Objects.isNull(annotationInstance)) {
             throw new IllegalArgumentException(String.format("Consumed Event requires %s annotation for method %s in class %s.",
-                    DOT_NAME_MESSAGE, methodInfo.name(), methodInfo.declaringClass()));
+                    IrisDotNames.MESSAGE, methodInfo.name(), methodInfo.declaringClass()));
         }
 
         return annotationInstance;
@@ -52,6 +49,6 @@ public class ScannerUtils {
      * @return Cacheable annotation if present
      */
     public static Optional<AnnotationInstance> getCacheableAnnotation(final ClassInfo classInfo) {
-        return Optional.ofNullable(classInfo.declaredAnnotation(DOT_NAME_CACHED_MESSAGE));
+        return Optional.ofNullable(classInfo.declaredAnnotation(IrisDotNames.DOT_NAME_CACHED_MESSAGE));
     }
 }
