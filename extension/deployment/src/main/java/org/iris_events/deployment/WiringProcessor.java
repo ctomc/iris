@@ -37,7 +37,7 @@ public class WiringProcessor {
         for (BeanInfo bean : beanDiscoveryFinished.beanStream().classBeans()) {
             // TODO: add support for inherited business methods
             //noinspection OptionalGetWithoutIsPresent
-
+g
             for (MethodInfo method : bean.getTarget().get().asClass().methods()) {
 
                 AnnotationInstance messageHandler = transformedAnnotations.getAnnotation(method, IrisDotNames.MESSAGE_HANDLER);
@@ -56,7 +56,7 @@ public class WiringProcessor {
                     produceIncomingChannel(appChannels, exchange);
 
                     if (method.returnType() != null && method.returnType().kind() == Type.Kind.CLASS) {
-                        //todo this is completly wrong as needs to be loaded from @Message annotation
+                        //todo this is completely wrong as needs to be loaded from @Message annotation
                         String eventName = method.returnType().name().withoutPackagePrefix().toLowerCase();
 
                         configDescriptionBuildItemBuildProducer.produce(new ConfigDescriptionBuildItem(
